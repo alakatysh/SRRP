@@ -1,0 +1,18 @@
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: sppr_mysql_ns
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: sppr_db
+      MYSQL_USER: sppr_user
+      MYSQL_PASSWORD: sppr_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
